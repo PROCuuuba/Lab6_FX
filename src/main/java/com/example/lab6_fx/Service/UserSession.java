@@ -6,6 +6,7 @@ public class UserSession {
     private QuizGame game;
     private int correct = 0;
     private int total = 0;
+    private int skipped = 0;
     private QuizQuestion currentQuestion;
 
     public UserSession(QuizGame game) {
@@ -24,7 +25,18 @@ public class UserSession {
         return result;
     }
 
-    public String getStats() {
-        return correct + "/" + total;
+    public void skip() {
+        skipped++;
+    }
+
+    public String getFinalStats() {
+        return "🏁 Игра окончена!\n\n" +
+                "✅ Правильных: " + correct + "\n" +
+                "❌ Неправильных: " + (total - correct - skipped) + "\n" +
+                "⏭ Пропущенных: " + skipped;
+    }
+
+    public QuizGame getGame() {
+        return game;
     }
 }

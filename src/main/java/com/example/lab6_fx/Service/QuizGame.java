@@ -17,15 +17,19 @@ public class QuizGame {
 
     public QuizQuestion getNextQuestion() {
         if (used.size() == countries.size()) {
-            used.clear();
+            return null;
         }
 
         Country c;
         do {
             c = countries.get(random.nextInt(countries.size()));
         } while (used.contains(c));
-        used.add(c);
 
+        used.add(c);
         return new QuizQuestion(c);
+    }
+
+    public boolean isFinished() {
+        return used.size() == countries.size();
     }
 }
